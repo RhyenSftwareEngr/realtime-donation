@@ -6,6 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 // Connect to backend Socket.IO server
 const socket = io("http://localhost:8888");
+const GOAL = 100;
 
 function App() {
   // State for cash value
@@ -84,6 +85,24 @@ function App() {
           style={{ maxWidth: 400, width: "100%" }}
         >
           <div className="card-body text-center">
+            {/* ADD PROGRESS BAR HERE */}
+            <div className="mb-3">
+              <div className="progress" style={{ height: "24px" }}>
+                <div
+                  className="progress-bar bg-success"
+                  role="progressbar"
+                  style={{ width: `${Math.min((cash / GOAL) * 100, 100)}%` }}
+                  aria-valuenow={cash}
+                  aria-valuemin={0}
+                  aria-valuemax={GOAL}
+                >
+                  {cash >= GOAL
+                    ? "Goal Reached!"
+                    : `${Math.min((cash / GOAL) * 100, 100).toFixed(0)}%`}
+                </div>
+              </div>
+              <small className="text-muted">Goal: ${GOAL}</small>
+            </div>
             <h2 className="display-5 mb-3">
               <span className="badge bg-success p-3">
                 <i className="bi bi-cash-coin me-2"></i>${cash}
