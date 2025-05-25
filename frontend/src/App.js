@@ -8,6 +8,7 @@ import "./modern.css"; // Custom modern styles
 // Connect to backend Socket.IO server
 const socket = io();
 const GOAL = 100;
+const [leaderboard, setLeaderboard] = useState({});
 
 function App() {
   const [cash, setCash] = useState(0);
@@ -56,16 +57,21 @@ function App() {
       prevCash.current = newCash;
       setCash(newCash);
     });
+
+    socket.on("leaderboard", (data) => {
+      setLeaderboard(data);
+    });
+
     return () => {
       socket.off("cashUpdate");
+      socket.off("leaderboard");
     };
   }, []);
 
   // Emit donate event
   const handleDonate = () => {
-    socket.emit("donate");
+    socket.emit("donate", { name: user?.name });
   };
-
   // Emit redeem event
   const handleRedeem = () => {
     socket.emit("redeem");
@@ -216,7 +222,37 @@ function App() {
           </div>
         </div>
       )}
-
+      {isAuthenticated && (
+        <div
+          className="leaderboard mt-4"
+          style={{ maxWidth: 420, width: "100%" }}
+        >
+          <h5 className="mb-2">Top Donors</h5>
+          <ul className="list-group">
+            {Object.entries(leaderboard)
+              .sort((a, b) => b[1] - a[1])
+              .slice(0, 5)
+              .map(([name, amount], idx) => (
+                <li
+                  key={name}
+                  className="list-group-item d-flex justify-content-between align-items-center"
+                >
+                  <span>
+                    <b>
+                      {idx + 1}. {name}
+                    </b>
+                  </span>
+                  <span className="badge bg-primary rounded-pill">
+                    ₱{amount}
+                  </span>
+                </li>
+              ))}
+            {Object.keys(leaderboard).length === 0 && (
+              <li className="list-group-item text-muted">No donors yet.</li>
+            )}
+          </ul>
+        </div>
+      )}
       {/* Footer */}
       <footer className="mt-5 text-muted small">
         {isAuthenticated && user && (

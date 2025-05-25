@@ -5,6 +5,8 @@ const cors = require("cors");
 const { Server } = require("socket.io");
 const path = require("path");
 
+let leaderboard = {};
+
 // Initialize Express app
 const app = express();
 app.use(cors());
@@ -21,8 +23,10 @@ const io = new Server(server, {
 // Serve static files from React build
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-// Catch-all route to serve React app, but exclude /socket.io for Socket.IO to work
-app.get(/^\/(?!socket.io).*/, (req, res) => {
+app.get("*", (req, res) => {
+  if (req.originalUrl.startsWith("/socket.io")) {
+    return;
+  }
   res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
 });
 
@@ -33,13 +37,19 @@ let cash = 100;
 io.on("connection", (socket) => {
   // Send current cash value to newly connected client
   socket.emit("cashUpdate", cash);
+  socket.emit("leaderboard", leaderboard);
 
   // Listen for 'donate' event from client
-  socket.on("donate", () => {
-    cash += 10; // Increase cash by 10
-    io.emit("cashUpdate", cash); // Broadcast new cash value to all clients
+  socket.on("donate", (user) => {
+    cash += 10;
+    // Update leaderboard
+    if (user && user.name) {
+      leaderboard[user.name] = (leaderboard[user.name] || 0) + 10;
+    }
+    io.emit("cashUpdate", cash);
+    // Broadcast updated leaderboard
+    io.emit("leaderboard", leaderboard);
   });
-
   // Listen for 'redeem' event from client
   socket.on("redeem", () => {
     if (cash > 0) {
