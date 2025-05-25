@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "./modern.css"; // Custom modern styles
 
 // Connect to backend Socket.IO server
-const socket = io("http://localhost:8888");
+const socket = io();
 const GOAL = 100;
 
 function App() {
