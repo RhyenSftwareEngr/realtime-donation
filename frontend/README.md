@@ -1,3 +1,76 @@
+# Real-Time Community Pantry Donation App
+
+A real-time donation application inspired by the Community Pantry movement in the Philippines. Built with Express, React, and Socket.IO.
+
+## Features
+
+- Real-time updates of donation cash for all users
+- Donate and redeem cash with instant feedback
+- Modern, responsive UI with Bootstrap
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm
+
+### Setup Instructions
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/your-username/your-repo-name.git
+   cd Socket_assignment
+   ```
+
+2. **Install backend dependencies:**
+
+   ```bash
+   cd backend
+   npm install
+   ```
+
+3. **Start the backend server:**
+
+   ```bash
+   node server.js
+   ```
+
+4. **Install frontend dependencies:**
+
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+
+5. **Start the frontend app:**
+
+   ```bash
+   npm start
+   ```
+
+6. **Open your browser and go to:**  
+   [http://localhost:3000](http://localhost:3000)
+
+## How It Works
+
+- The backend keeps track of the total cash.
+- When a user donates or redeems, the backend updates the cash and broadcasts the new value to all connected clients in real time.
+- The frontend displays the current cash and provides buttons for donating and redeeming.
+
+## Contributing
+
+- Please add comments to your code for clarity.
+- Follow the existing project structure.
+- Open issues or pull requests for new features or bug fixes.
+
+## License
+
+MIT
+
+## Project Structure
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
