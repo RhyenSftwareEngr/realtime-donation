@@ -1,0 +1,55 @@
+/* Import Inter font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+
+body,
+.modern-bg {
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%) !important;
+}
+
+.modern-card {
+  background: rgba(255, 255, 255, 0.7) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18) !important;
+  backdrop-filter: blur(8px);
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  transition: box-shadow 0.2s;
+}
+
+.modern-card:hover {
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.22) !important;
+}
+
+.btn-modern {
+  border-radius: 12px !important;
+  transition: transform 0.1s, box-shadow 0.1s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.btn-modern:hover,
+.btn-modern:focus {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.modern-progress .progress-bar.modern-gradient {
+  background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%) !important;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.toast {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  border-radius: 12px;
+}
+
+footer a {
+  color: #185a9d;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
