@@ -105,7 +105,8 @@ function App() {
             </div>
             <h2 className="display-5 mb-3">
               <span className="badge bg-success p-3">
-                <i className="bi bi-cash-coin me-2"></i>Pesos{cash}
+                <i className="bi bi-cash-coin me-2"></i>
+                {cash} Pesos
               </span>
             </h2>
             <div className="d-flex justify-content-between gap-3 mb-3">
