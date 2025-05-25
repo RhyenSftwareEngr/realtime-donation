@@ -33,8 +33,10 @@ io.on("connection", (socket) => {
 
   // Listen for 'redeem' event from client
   socket.on("redeem", () => {
-    cash -= 10; // Decrease cash by 10
-    io.emit("cashUpdate", cash); // Broadcast new cash value to all clients
+    if (cash > 0) {
+      cash -= 10; // Decrease cash by 10
+      io.emit("cashUpdate", cash); // Broadcast new cash value to all clients
+    }
   });
 });
 
