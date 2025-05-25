@@ -3,6 +3,7 @@ const express = require("express");
 const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io");
+const path = require("path");
 
 // Initialize Express app
 const app = express();
@@ -17,9 +18,11 @@ const io = new Server(server, {
   },
 });
 
-const path = require("path");
+// Serve static files from React build
 app.use(express.static(path.join(__dirname, "../frontend/build")));
-app.get("*", (req, res) => {
+
+// Catch-all route to serve React app, but exclude /socket.io for Socket.IO to work
+app.get(/^\/(?!socket.io).*/, (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
 });
 
@@ -47,6 +50,7 @@ io.on("connection", (socket) => {
 });
 
 // Start the server
-server.listen(8888, () => {
-  console.log("Server running on http://localhost:8888");
+const PORT = process.env.PORT || 8888;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
