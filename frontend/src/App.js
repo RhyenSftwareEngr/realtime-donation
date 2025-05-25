@@ -105,7 +105,7 @@ function App() {
             </div>
             <h2 className="display-5 mb-3">
               <span className="badge bg-success p-3">
-                <i className="bi bi-cash-coin me-2"></i>${cash}
+                <i className="bi bi-cash-coin me-2"></i>Pesos{cash}
               </span>
             </h2>
             <div className="d-flex justify-content-between gap-3 mb-3">
@@ -113,13 +113,13 @@ function App() {
                 className="btn btn-primary btn-lg flex-fill"
                 onClick={handleDonate}
               >
-                <i className="bi bi-plus-circle me-2"></i>Donate $10
+                <i className="bi bi-plus-circle me-2"></i>Donate 10 Pesos
               </button>
               <button
                 className="btn btn-danger btn-lg flex-fill"
                 onClick={handleRedeem}
               >
-                <i className="bi bi-dash-circle me-2"></i>Redeem $10
+                <i className="bi bi-dash-circle me-2"></i>Redeem 10 Pesos
               </button>
             </div>
             <div className="alert alert-warning mt-3 mb-0" role="alert">
